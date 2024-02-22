@@ -1,0 +1,7 @@
+#!/bin/bash
+if [[ $1 == *.cpp ]];
+then
+  cmd="clang++-7 -o ${1/.cpp/} $1 `llvm-config-7 --cxxflags` `llvm-config-7 --ldflags` `llvm-config-7 --libs` -lpthread -lncurses -ldl -std=c++17";
+  echo "$cmd";
+  $cmd;
+fi
