@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x562da0b6d8e0 [shape=record,label="{entry:\l  %retval = alloca i32, align 4\l  %x = alloca i32, align 4\l  store i32 0, i32* %retval, align 4\l  br label %while.cond\l}"];
+	Node0x562da0b6d8e0 -> Node0x562da0b6e200;
+	Node0x562da0b6e200 [shape=record,label="{while.cond:                                       \l  %0 = load i32, i32* %x, align 4\l  %cmp = icmp sgt i32 %0, 1\l  br i1 %cmp, label %while.body, label %while.end\l|{<s0>T|<s1>F}}"];
+	Node0x562da0b6e200:s0 -> Node0x562da0b6e3f0;
+	Node0x562da0b6e200:s1 -> Node0x562da0b6e4d0;
+	Node0x562da0b6e3f0 [shape=record,label="{while.body:                                       \l  br label %while.cond\l}"];
+	Node0x562da0b6e3f0 -> Node0x562da0b6e200;
+	Node0x562da0b6e4d0 [shape=record,label="{while.end:                                        \l  %1 = load i32, i32* %x, align 4\l  %add = add nsw i32 %1, 1\l  store i32 %add, i32* %x, align 4\l  ret i32 0\l}"];
+}
