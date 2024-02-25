@@ -14,7 +14,7 @@
 typedef std::set<llvm::Instruction*> instr_set;
 
 std::string getSimpleNodeLabel(const llvm::BasicBlock *Node);
-instr_set updateTaintedVars(llvm::BasicBlock* BB, instr_set taintedVars);
+void updateTaintedVars(llvm::BasicBlock* BB, instr_set &taintedVars);
 void printBBVars(const std::map<std::string, instr_set> &BBVars);
 
 
@@ -43,10 +43,10 @@ int main(int argc, char **argv) {
     // initialise dfs with entry block
     dfsStack.emplace(&F->getEntryBlock(), instr_set());
     while (!dfsStack.empty()) {
-        auto [BB, entryVars] = dfsStack.top();
+        auto [BB, taintedVars] = dfsStack.top();
         dfsStack.pop();
 
-        instr_set taintedVars = updateTaintedVars(BB, entryVars);
+        updateTaintedVars(BB, taintedVars);
 
         // since taint analysis is a `may` analysis
         // use union for different branches
@@ -77,10 +77,10 @@ void printBBVars(const std::map<std::string, instr_set> &BBVars) {
     }
 }
 
-instr_set updateTaintedVars(llvm::BasicBlock* BB, instr_set taintedVars) {
+void updateTaintedVars(llvm::BasicBlock* BB, instr_set &taintedVars) {
     for (auto &I: *BB) {
         if (I.getName().str() == "source") {
-        // if current instruction is `source` add it to tainted
+            // if current instruction is `source` add it to tainted
             taintedVars.insert(&I);
         } else {
             if (llvm::isa<llvm::LoadInst>(I)) {
@@ -123,7 +123,6 @@ instr_set updateTaintedVars(llvm::BasicBlock* BB, instr_set taintedVars) {
             ++iter;
     }
 
-    return taintedVars;
 }
 
 

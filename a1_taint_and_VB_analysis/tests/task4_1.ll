@@ -1,5 +1,5 @@
-; ModuleID = 'tests/example_4.c'
-source_filename = "tests/example_4.c"
+; ModuleID = 'tests/task4_1.c'
+source_filename = "tests/task4_1.c"
 target datalayout = "e-m:e-i64:64-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-pc-linux-gnu"
 

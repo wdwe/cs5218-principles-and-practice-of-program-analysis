@@ -1,5 +1,5 @@
-; ModuleID = 'tests/test6.c'
-source_filename = "tests/test6.c"
+; ModuleID = 'tests/task5_2.c'
+source_filename = "tests/task5_2.c"
 target datalayout = "e-m:e-i64:64-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-pc-linux-gnu"
 
@@ -7,13 +7,22 @@ target triple = "x86_64-pc-linux-gnu"
 define dso_local i32 @main() #0 {
 entry:
   %retval = alloca i32, align 4
-  %k = alloca i32, align 4
-  %j = alloca i32, align 4
+  %x = alloca i32, align 4
   store i32 0, i32* %retval, align 4
-  store i32 1, i32* %k, align 4
-  store i32 1, i32* %j, align 4
-  %0 = load i32, i32* %k, align 4
-  store i32 %0, i32* %k, align 4
+  br label %while.cond
+
+while.cond:                                       ; preds = %while.body, %entry
+  %0 = load i32, i32* %x, align 4
+  %cmp = icmp sgt i32 %0, 1
+  br i1 %cmp, label %while.body, label %while.end
+
+while.body:                                       ; preds = %while.cond
+  br label %while.cond
+
+while.end:                                        ; preds = %while.cond
+  %1 = load i32, i32* %x, align 4
+  %add = add nsw i32 %1, 1
+  store i32 %add, i32* %x, align 4
   ret i32 0
 }
 

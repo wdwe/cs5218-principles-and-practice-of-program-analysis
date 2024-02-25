@@ -1,4 +1,6 @@
 #!/bin/bash
+rm tests/*.ll;
+rm tests/*.dot;
 for file in tests/*.c;
 do
   clang-7 -fno-discard-value-names -emit-llvm -S -o "${file/.c/.ll}" $file

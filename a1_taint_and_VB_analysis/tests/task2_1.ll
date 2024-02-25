@@ -1,5 +1,5 @@
-; ModuleID = 'tests/test2.c'
-source_filename = "tests/test2.c"
+; ModuleID = 'tests/task2_1.c'
+source_filename = "tests/task2_1.c"
 target datalayout = "e-m:e-i64:64-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-pc-linux-gnu"
 
@@ -7,41 +7,29 @@ target triple = "x86_64-pc-linux-gnu"
 define dso_local i32 @main() #0 {
 entry:
   %retval = alloca i32, align 4
-  %a = alloca i32, align 4
-  %b = alloca i32, align 4
-  %x = alloca i32, align 4
+  %i = alloca i32, align 4
+  %j = alloca i32, align 4
+  %k = alloca i32, align 4
+  %sink = alloca i32, align 4
+  %source = alloca i32, align 4
   store i32 0, i32* %retval, align 4
-  store i32 0, i32* %x, align 4
-  %0 = load i32, i32* %a, align 4
-  %cmp = icmp sgt i32 %0, 0
+  %0 = load i32, i32* %source, align 4
+  store i32 %0, i32* %i, align 4
+  %1 = load i32, i32* %j, align 4
+  %cmp = icmp sgt i32 %1, 1
   br i1 %cmp, label %if.then, label %if.else
 
 if.then:                                          ; preds = %entry
-  %1 = load i32, i32* %x, align 4
-  %sub = sub nsw i32 %1, 5
-  store i32 %sub, i32* %x, align 4
   br label %if.end
 
 if.else:                                          ; preds = %entry
-  store i32 2, i32* %x, align 4
+  %2 = load i32, i32* %i, align 4
+  store i32 %2, i32* %k, align 4
   br label %if.end
 
 if.end:                                           ; preds = %if.else, %if.then
-  %2 = load i32, i32* %b, align 4
-  %cmp1 = icmp sgt i32 %2, 0
-  br i1 %cmp1, label %if.then2, label %if.else3
-
-if.then2:                                         ; preds = %if.end
-  store i32 3, i32* %x, align 4
-  br label %if.end4
-
-if.else3:                                         ; preds = %if.end
-  %3 = load i32, i32* %x, align 4
-  %add = add nsw i32 %3, 51
-  store i32 %add, i32* %x, align 4
-  br label %if.end4
-
-if.end4:                                          ; preds = %if.else3, %if.then2
+  %3 = load i32, i32* %k, align 4
+  store i32 %3, i32* %sink, align 4
   %4 = load i32, i32* %retval, align 4
   ret i32 %4
 }
