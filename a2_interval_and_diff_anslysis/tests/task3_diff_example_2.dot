@@ -1,0 +1,12 @@
+digraph "CFG for 'main' function" {
+	label="CFG for 'main' function";
+
+	Node0x5624cad5dc80 [shape=record,label="{entry:\l  %retval = alloca i32, align 4\l  %a = alloca i32, align 4\l  %b = alloca i32, align 4\l  %x = alloca i32, align 4\l  %y = alloca i32, align 4\l  %z = alloca i32, align 4\l  %i = alloca i32, align 4\l  %N = alloca i32, align 4\l  store i32 0, i32* %retval, align 4\l  store i32 0, i32* %z, align 4\l  store i32 0, i32* %i, align 4\l  br label %while.cond\l}"];
+	Node0x5624cad5dc80 -> Node0x5624cad5e9a0;
+	Node0x5624cad5e9a0 [shape=record,label="{while.cond:                                       \l  %0 = load i32, i32* %i, align 4\l  %1 = load i32, i32* %N, align 4\l  %cmp = icmp slt i32 %0, %1\l  br i1 %cmp, label %while.body, label %while.end\l|{<s0>T|<s1>F}}"];
+	Node0x5624cad5e9a0:s0 -> Node0x5624cad5ebf0;
+	Node0x5624cad5e9a0:s1 -> Node0x5624cad5ecd0;
+	Node0x5624cad5ebf0 [shape=record,label="{while.body:                                       \l  %2 = load i32, i32* %x, align 4\l  %3 = load i32, i32* %y, align 4\l  %mul = mul nsw i32 2, %3\l  %mul1 = mul nsw i32 %mul, 3\l  %4 = load i32, i32* %z, align 4\l  %mul2 = mul nsw i32 %mul1, %4\l  %add = add nsw i32 %2, %mul2\l  %rem = srem i32 %add, 3\l  %sub = sub nsw i32 0, %rem\l  store i32 %sub, i32* %x, align 4\l  %5 = load i32, i32* %x, align 4\l  %mul3 = mul nsw i32 3, %5\l  %6 = load i32, i32* %y, align 4\l  %mul4 = mul nsw i32 2, %6\l  %add5 = add nsw i32 %mul3, %mul4\l  %7 = load i32, i32* %z, align 4\l  %add6 = add nsw i32 %add5, %7\l  %rem7 = srem i32 %add6, 11\l  store i32 %rem7, i32* %y, align 4\l  %8 = load i32, i32* %z, align 4\l  %inc = add nsw i32 %8, 1\l  store i32 %inc, i32* %z, align 4\l  br label %while.cond\l}"];
+	Node0x5624cad5ebf0 -> Node0x5624cad5e9a0;
+	Node0x5624cad5ecd0 [shape=record,label="{while.end:                                        \l  ret i32 0\l}"];
+}

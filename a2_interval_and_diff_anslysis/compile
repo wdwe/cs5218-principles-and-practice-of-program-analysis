@@ -1,0 +1,10 @@
+#!/bin/bash
+for cpp_file in "$@"
+do
+  if [[ $cpp_file == *.cpp ]];
+  then
+    cmd="clang++-7 -o ${cpp_file/.cpp/} $cpp_file interval.cpp abst.cpp utils.cpp `llvm-config-7 --cxxflags` `llvm-config-7 --ldflags` `llvm-config-7 --libs` -lpthread -lncurses -ldl -std=c++17";
+    echo "$cmd";
+    $cmd;
+  fi
+done
